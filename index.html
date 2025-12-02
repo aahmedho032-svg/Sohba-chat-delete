@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete Account Request</title>
+  <link rel="icon" type="image/png" href="IMG-20251202-WA0000.jpg">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("x4hW-mkBzOcIJxZCE"); // حط ال PUBLIC KEY
+    })();
+
+    function sendDeleteRequest(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const details = document.getElementById("details").value;
+
+      const templateParams = {
+        user_email: email,
+        request_type: "حذف الحساب",
+        details: details,
+      };
+
+      emailjs
+        .send("service_jhi4ash", "template_7a1v1gq", templateParams)
+        .then(
+          function(response) {
+            alert("تم ارسال الطلب بنجاح");
+          },
+          function(error) {
+            alert("حصلت مشكله في الإرسال");
+          }
+        );
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #ddd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-box {
+      background: #f4f4f4;
+      padding: 30px;
+      width: 420px;
+      border-radius: 10px;
+      border: 2px solid #ff8ac9;
+      box-shadow: 0 0 15px rgba(255, 123, 172, 0.4);
+    }
+    input, select, textarea {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ff8ac9;
+      background:#222;
+      color:#fff;
+      font-size:15px;
+    }
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      border: none;
+      background: #1976d2;
+      color: white;
+      border-radius: 8px;
+      font-size:16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <form class="form-box" onsubmit="sendDeleteRequest(event)">
+    <img src="IMG-20251202-WA0000.jpg" style="width:80px;height:80px;display:block;margin:0 auto 15px;" alt="app icon" />
+    <h3 style="text-align:center;color:#fff;">طلب حذف الحساب</h3>
+
+    <label { color:#fff; }>البريد الإلكتروني</label>
+    <input type="email" id="email" required />
+
+    <label>نوع الطلب</label>
+    <select disabled>
+      <option selected>حذف الحساب</option>
+    </select>
+
+    <label>تفاصيل الطلب</label>
+    <textarea id="details" rows="4"></textarea>
+
+    <button type="submit">ارسال الطلب</button>
+  </form>
+</body>
+</html>
